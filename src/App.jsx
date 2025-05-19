@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.css';
-import { FaCheckCircle, FaStar } from 'react-icons/fa';
+import { FaCheckCircle, FaStar, FaWhatsapp, FaInstagram, FaPhone } from 'react-icons/fa';
+
 
 function App() {
   const testimonios = [
@@ -114,25 +115,37 @@ function App() {
       </footer>
 
       {/* Botones flotantes */}
-      <a
-        href="https://wa.me/593988673679"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-all duration-300"
-        aria-label="Chatea por WhatsApp"
-      >
-        <i className="fab fa-whatsapp text-xl"></i>
-      </a>
+      {/* Botón WhatsApp */}
+<a
+  href="https://wa.me/593988673679"
+  target="_blank"
+  rel="noopener noreferrer"
+  title="Chatea por WhatsApp"
+  className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition duration-300"
+>
+  <FaWhatsapp className="text-2xl" />
+</a>
 
-      <a
-        href="https://instagram.com/tecnomer.ec"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-20 z-50 bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500 hover:opacity-90 text-white p-4 rounded-full shadow-lg transition-all duration-300"
-        aria-label="Síguenos en Instagram"
-      >
-        <i className="fab fa-instagram text-xl"></i>
-      </a>
+{/* Botón Instagram */}
+<a
+  href="https://instagram.com/tecnomer.ec"
+  target="_blank"
+  rel="noopener noreferrer"
+  title="Visita nuestro Instagram"
+  className="fixed bottom-6 right-20 z-50 bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500 hover:opacity-90 text-white p-4 rounded-full shadow-lg transition duration-300"
+>
+  <FaInstagram className="text-2xl" />
+</a>
+
+{/* Botón para llamar */}
+<a
+  href="tel:+593988673679"
+  title="Llamar a TecnoMer"
+  className="fixed bottom-6 right-36 z-50 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg transition duration-300"
+>
+  <FaPhone className="text-2xl" />
+</a>
+
     </div>
   );
 }
