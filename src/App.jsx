@@ -24,10 +24,10 @@ function App() {
   return (
     <div className="bg-white font-sans text-gray-800">
       {/* Hero */}
-      <section className="bg-black text-white py-16 px-6 text-center">
-        <img src="/logo.png" alt="TecnoMer Logo" className="mx-auto mb-6 w-32 animate-pulse" />
-        <h1 className="text-4xl font-bold mb-4 animate-bounce">Soluciones digitales para tu negocio</h1>
-        <p className="text-lg">Sistemas de caja, apps móviles y bots automatizados</p>
+      <section className="bg-white text-black py-16 px-6 text-center">
+      <img src="/logo.png" alt="TecnoMer Logo" className="mx-auto mb-6 w-32" />
+      <h1 className="text-4xl font-bold mb-4">Soluciones digitales para tu negocio</h1>
+      <p className="text-lg">Sistemas de caja, apps móviles y bots automatizados</p>
       </section>
 
       {/* Servicios */}
