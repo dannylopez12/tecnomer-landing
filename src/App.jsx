@@ -25,9 +25,9 @@ function App() {
     <div className="bg-white font-sans text-gray-800">
       {/* Hero */}
       <section className="bg-white text-black py-16 px-6 text-center">
-      <img src="/logo.png" alt="TecnoMer Logo" className="mx-auto mb-6 w-32" />
-      <h1 className="text-4xl font-bold mb-4">Soluciones digitales para tu negocio</h1>
-      <p className="text-lg">Sistemas de caja, apps móviles y bots automatizados</p>
+        <img src="/logo.png" alt="TecnoMer Logo" className="mx-auto mb-6 w-32" />
+        <h1 className="text-4xl font-bold mb-4">Soluciones digitales para tu negocio</h1>
+        <p className="text-lg">Sistemas de caja, apps móviles y bots automatizados</p>
       </section>
 
       {/* Servicios */}
@@ -112,8 +112,30 @@ function App() {
       <footer className="bg-black text-white py-4 text-center text-sm">
         © {new Date().getFullYear()} TecnoMer. Todos los derechos reservados.
       </footer>
+
+      {/* Botones flotantes */}
+      <a
+        href="https://wa.me/593988673679"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-all duration-300"
+        aria-label="Chatea por WhatsApp"
+      >
+        <i className="fab fa-whatsapp text-xl"></i>
+      </a>
+
+      <a
+        href="https://instagram.com/tecnomer.ec"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-20 z-50 bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500 hover:opacity-90 text-white p-4 rounded-full shadow-lg transition-all duration-300"
+        aria-label="Síguenos en Instagram"
+      >
+        <i className="fab fa-instagram text-xl"></i>
+      </a>
     </div>
   );
 }
 
 export default App;
+
