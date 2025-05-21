@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './index.css';
-import { FaCheckCircle, FaStar, FaWhatsapp, FaInstagram, FaPhone } from 'react-icons/fa';
+import { FaCheckCircle, FaStar } from 'react-icons/fa';
 
 function App() {
   const testimonios = [
@@ -20,129 +20,118 @@ function App() {
       estrellas: 4
     }
   ];
-  const Counter = ({ label, end }) => {
-  const [count, setCount] = useState(0);
-  const ref = useRef();
-  const started = useRef(false);
 
+  const [dias, setDias] = useState(0);
+  const [visible, setVisible] = useState(false);
+  const refStats = useRef();
+
+  // Calcular días desde febrero 1, 2021
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started.current) {
-          started.current = true;
-          let current = 0;
-          const step = Math.ceil(end / 50);
-          const interval = setInterval(() => {
-            current += step;
-            if (current >= end) {
-              current = end;
-              clearInterval(interval);
-            }
-            setCount(current);
-          }, 30);
+    const inicio = new Date('2021-02-01');
+    const hoy = new Date();
+    const diferencia = Math.floor((hoy - inicio) / (1000 * 60 * 60 * 24));
+    setDias(diferencia);
+  }, []);
+
+  // Scroll detection para activar contador
+  useEffect(() => {
+    const handleScroll = () => {
+      if (refStats.current) {
+        const { top } = refStats.current.getBoundingClientRect();
+        const isVisible = top < window.innerHeight;
+        setVisible(isVisible);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Trigger on mount
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Contadores con animación
+  const animateValue = (end, duration = 2000) => {
+    const [value, setValue] = useState(0);
+    useEffect(() => {
+      if (!visible) return;
+      let start = 0;
+      const increment = end / (duration / 30);
+      const timer = setInterval(() => {
+        start += increment;
+        if (start >= end) {
+          clearInterval(timer);
+          setValue(end);
+        } else {
+          setValue(Math.floor(start));
         }
-      },
-      { threshold: 0.5 }
-    );
+      }, 30);
+      return () => clearInterval(timer);
+    }, [visible, end]);
+    return value;
+  };
 
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [end]);
-
-  return (
-    <div ref={ref} className="text-center">
-      <h3 className="text-4xl font-bold">{count}</h3>
-      <p className="uppercase text-xs mt-1">{label}</p>
-    </div>
-  );
-};
-
-const StatsSection = () => {
-  const daysWorked = Math.floor((Date.now() - new Date('2021-02-01')) / (1000 * 60 * 60 * 24));
-
-  return (
-    <section className="bg-white py-20 px-6 grid md:grid-cols-4 gap-10">
-      <Counter label="AÑOS DE EXPERIENCIA" end={4} />
-      <Counter label="TAZAS DE CAFE" end={daysWorked} />
-      <Counter label="PROYECTOS TERMINADOS" end={24} />
-      <Counter label="CLIENTES SATISFECHOS" end={15} />
-    </section>
-  );
-};
-
-  export default StatsSection;
-
-
- const proyectos = [
-  {
-    titulo: 'Bot de WhatsApp para Ventas',
-    descripcion: 'Asistente virtual que atiende clientes y automatiza ventas.',
-    imagen: '/chatbot-ventas.png' // Ruta relativa desde /public
-  },
-  {
-    titulo: 'App de Delivery',
-    descripcion: 'Pedidos online para restaurantes con pagos integrados.',
-    imagen: '/app-delivery.png' // ← Aquí puedes subir otra imagen a /public
-  },
-  {
-    titulo: 'Sistema de Caja',
-    descripcion: 'Control de ventas, inventario y reportes desde cualquier dispositivo.',
-    imagen: '/sistema-caja.png' // ← También deberás subir esta
-  }
-];
+  const años = animateValue(4);
+  const tazas = animateValue(dias);
+  const proyectos = animateValue(24);
+  const clientes = animateValue(15);
 
   return (
     <div className="bg-white font-sans text-gray-800">
       {/* Hero */}
-      <section className="bg-white text-black py-16 px-6 text-center animate-fade-in">
-        <img src="/logo.png" alt="TecnoMer Logo" className="mx-auto mb-6 w-32 animate-pulse" />
-        <h1 className="text-4xl font-bold mb-4 animate-bounce">Soluciones digitales para tu negocio</h1>
+      <section className="bg-white text-black py-16 px-6 text-center">
+        <img src="/logo.png" alt="TecnoMer Logo" className="mx-auto mb-6 w-32" />
+        <h1 className="text-4xl font-bold mb-4">Soluciones digitales para tu negocio</h1>
         <p className="text-lg">Sistemas de caja, apps móviles y bots automatizados</p>
       </section>
 
       {/* Servicios */}
       <section className="bg-gray-100 py-16 px-6 text-center">
-        <h2 className="text-3xl font-bold mb-10 animate-fade-in">Nuestros Servicios</h2>
+        <h2 className="text-3xl font-bold mb-10">Nuestros Servicios</h2>
         <div className="grid gap-8 md:grid-cols-3">
-          <div className="transform hover:scale-105 transition duration-500">
+          <div>
             <FaCheckCircle className="text-purple-600 text-4xl mx-auto mb-2" />
             <p>Desarrollo de sistemas de facturación y punto de venta</p>
           </div>
-          <div className="transform hover:scale-105 transition duration-500">
+          <div>
             <FaCheckCircle className="text-purple-600 text-4xl mx-auto mb-2" />
             <p>Aplicaciones móviles personalizadas</p>
           </div>
-          <div className="transform hover:scale-105 transition duration-500">
+          <div>
             <FaCheckCircle className="text-purple-600 text-4xl mx-auto mb-2" />
             <p>Chatbots automatizados para atención al cliente</p>
           </div>
         </div>
       </section>
 
-      {/* Proyectos */}
-      <section className="bg-white py-16 px-6 text-center">
-        <h2 className="text-3xl font-bold mb-10">Nuestros Proyectos</h2>
-        <div className="grid md:grid-cols-3 gap-10">
-          {proyectos.map((p, i) => (
-            <div key={i} className="rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition">
-              <img src={p.imagen} alt={p.titulo} className="w-full h-48 object-cover" />
-              <div className="p-4">
-                <h3 className="font-bold text-lg mb-2">{p.titulo}</h3>
-                <p>{p.descripcion}</p>
-              </div>
-            </div>
-          ))}
+      {/* Estadísticas */}
+      <section ref={refStats} className="bg-white py-20 text-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 max-w-5xl mx-auto text-black">
+          <div>
+            <p className="text-4xl font-bold">{años}</p>
+            <p className="mt-1 uppercase text-sm">Años de experiencia</p>
+          </div>
+          <div>
+            <p className="text-4xl font-bold">{tazas}</p>
+            <p className="mt-1 uppercase text-sm">Tazas de café</p>
+          </div>
+          <div>
+            <p className="text-4xl font-bold">{proyectos}</p>
+            <p className="mt-1 uppercase text-sm">Proyectos terminados</p>
+          </div>
+          <div>
+            <p className="text-4xl font-bold">{clientes}</p>
+            <p className="mt-1 uppercase text-sm">Clientes satisfechos</p>
+          </div>
         </div>
       </section>
 
       {/* Testimonios */}
-      <section className="bg-gray-100 py-16 px-6">
+      <section className="bg-white py-16 px-6">
         <h2 className="text-3xl font-bold mb-10 text-center">Lo que dicen nuestros clientes</h2>
         <div className="grid gap-6 md:grid-cols-3">
           {testimonios.map((t, i) => (
             <div
               key={i}
-              className="border border-gray-200 rounded-lg shadow-md p-4 hover:shadow-xl transition"
+              className="border border-gray-200 rounded-lg shadow-md p-4 hover:scale-105 transition-transform"
             >
               <div className="flex items-center mb-2">
                 {[...Array(t.estrellas)].map((_, i) => (
@@ -157,7 +146,7 @@ const StatsSection = () => {
       </section>
 
       {/* Contacto */}
-      <section className="bg-white py-16 px-6 text-center">
+      <section className="bg-gray-100 py-16 px-6 text-center">
         <h2 className="text-3xl font-bold mb-6">Contáctanos</h2>
         <form
           action="https://formspree.io/f/xpzvjnzy"
@@ -198,35 +187,6 @@ const StatsSection = () => {
       <footer className="bg-black text-white py-4 text-center text-sm">
         © {new Date().getFullYear()} TecnoMer. Todos los derechos reservados.
       </footer>
-
-      {/* Botones flotantes */}
-      <a
-        href="https://wa.me/593988673679"
-        target="_blank"
-        rel="noopener noreferrer"
-        title="Chatea por WhatsApp"
-        className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition duration-300"
-      >
-        <FaWhatsapp className="text-2xl" />
-      </a>
-
-      <a
-        href="https://instagram.com/tecnomer.ec"
-        target="_blank"
-        rel="noopener noreferrer"
-        title="Visita nuestro Instagram"
-        className="fixed bottom-6 right-20 z-50 bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500 hover:opacity-90 text-white p-4 rounded-full shadow-lg transition duration-300"
-      >
-        <FaInstagram className="text-2xl" />
-      </a>
-
-      <a
-        href="tel:+593988673679"
-        title="Llamar a TecnoMer"
-        className="fixed bottom-6 right-36 z-50 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg transition duration-300"
-      >
-        <FaPhone className="text-2xl" />
-      </a>
     </div>
   );
 }
