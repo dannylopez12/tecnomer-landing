@@ -88,43 +88,27 @@ function App() {
   const clientes = animateValue(15);
 
   return (
-    {/* Contacto */}
-      <section className="bg-gray-100 py-16 px-6 text-center">
-        <h2 className="text-3xl font-bold mb-6">Contáctanos</h2>
-        <form
-          action="https://formspree.io/f/xpzvjnzy"
-          method="POST"
-          className="max-w-lg mx-auto space-y-4"
-        >
-          <input
-            type="text"
-            name="name"
-            placeholder="Tu nombre"
-            required
-            className="w-full p-3 border border-gray-300 rounded"
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Tu correo"
-            required
-            className="w-full p-3 border border-gray-300 rounded"
-          />
-          <textarea
-            name="message"
-            placeholder="Tu mensaje"
-            required
-            rows="4"
-            className="w-full p-3 border border-gray-300 rounded"
-          />
-          <button
-            type="submit"
-            className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition"
-          >
-            Enviar
-          </button>
-        </form>
-      </section>
+     <div className="bg-white font-sans text-gray-800 relative">
+     {/* Botones flotantes */}
+      <a
+        href="https://wa.me/593988673679"
+        className="fixed bottom-20 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition"
+        title="Habla con nosotros en WhatsApp"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i className="fab fa-whatsapp text-2xl"></i>
+      </a>
+
+      <a
+        href="https://instagram.com/tecnomer.ec"
+        className="fixed bottom-6 right-6 z-50 bg-gradient-to-br from-pink-500 to-purple-600 hover:opacity-90 text-white p-4 rounded-full shadow-lg transition"
+        title="Síguenos en Instagram"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i className="fab fa-instagram text-2xl"></i>
+      </a>
 
       <section className="bg-white text-black py-16 px-6 text-center">
         <img src="/logo.png" alt="TecnoMer Logo" className="mx-auto mb-6 w-32 animate-pulse" />
