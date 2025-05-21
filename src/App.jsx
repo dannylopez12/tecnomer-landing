@@ -21,11 +21,28 @@ function App() {
     }
   ];
 
+  const proyectos = [
+    {
+      titulo: 'Bot de WhatsApp para Ventas',
+      descripcion: 'Asistente virtual que atiende clientes y automatiza ventas.',
+      imagen: '/chatbot-ventas.png'
+    },
+    {
+      titulo: 'App de Delivery',
+      descripcion: 'Pedidos online para restaurantes con pagos integrados.',
+      imagen: '/app-delivery.png'
+    },
+    {
+      titulo: 'Sistema de Caja',
+      descripcion: 'Control de ventas, inventario y reportes desde cualquier dispositivo.',
+      imagen: '/sistema-caja.png'
+    }
+  ];
+
   const [dias, setDias] = useState(0);
   const [visible, setVisible] = useState(false);
   const refStats = useRef();
 
-  // Calcular días desde febrero 1, 2021
   useEffect(() => {
     const inicio = new Date('2021-02-01');
     const hoy = new Date();
@@ -33,22 +50,18 @@ function App() {
     setDias(diferencia);
   }, []);
 
-  // Scroll detection para activar contador
   useEffect(() => {
     const handleScroll = () => {
       if (refStats.current) {
         const { top } = refStats.current.getBoundingClientRect();
-        const isVisible = top < window.innerHeight;
-        setVisible(isVisible);
+        setVisible(top < window.innerHeight);
       }
     };
-
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Trigger on mount
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Contadores con animación
   const animateValue = (end, duration = 2000) => {
     const [value, setValue] = useState(0);
     useEffect(() => {
@@ -71,39 +84,59 @@ function App() {
 
   const años = animateValue(4);
   const tazas = animateValue(dias);
-  const proyectos = animateValue(24);
+  const proyectosTerminados = animateValue(24);
   const clientes = animateValue(15);
 
   return (
-    <div className="bg-white font-sans text-gray-800">
-      {/* Hero */}
+    <div className="bg-white font-sans text-gray-800 relative">
+      <a href="https://wa.me/593988673679" className="fixed bottom-20 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition" title="Habla con nosotros en WhatsApp" target="_blank" rel="noopener noreferrer">
+        <i className="fab fa-whatsapp text-2xl"></i>
+      </a>
+
+      <a href="https://instagram.com/tecnomer.ec" className="fixed bottom-6 right-6 z-50 bg-gradient-to-br from-pink-500 to-purple-600 hover:opacity-90 text-white p-4 rounded-full shadow-lg transition" title="Síguenos en Instagram" target="_blank" rel="noopener noreferrer">
+        <i className="fab fa-instagram text-2xl"></i>
+      </a>
+
       <section className="bg-white text-black py-16 px-6 text-center">
-        <img src="/logo.png" alt="TecnoMer Logo" className="mx-auto mb-6 w-32" />
-        <h1 className="text-4xl font-bold mb-4">Soluciones digitales para tu negocio</h1>
+        <img src="/logo.png" alt="TecnoMer Logo" className="mx-auto mb-6 w-32 animate-pulse" />
+        <h1 className="text-4xl font-bold mb-4 animate-bounce">Soluciones digitales para tu negocio</h1>
         <p className="text-lg">Sistemas de caja, apps móviles y bots automatizados</p>
       </section>
 
-      {/* Servicios */}
       <section className="bg-gray-100 py-16 px-6 text-center">
         <h2 className="text-3xl font-bold mb-10">Nuestros Servicios</h2>
         <div className="grid gap-8 md:grid-cols-3">
-          <div>
+          <div className="hover:scale-105 transition">
             <FaCheckCircle className="text-purple-600 text-4xl mx-auto mb-2" />
             <p>Desarrollo de sistemas de facturación y punto de venta</p>
           </div>
-          <div>
+          <div className="hover:scale-105 transition">
             <FaCheckCircle className="text-purple-600 text-4xl mx-auto mb-2" />
             <p>Aplicaciones móviles personalizadas</p>
           </div>
-          <div>
+          <div className="hover:scale-105 transition">
             <FaCheckCircle className="text-purple-600 text-4xl mx-auto mb-2" />
             <p>Chatbots automatizados para atención al cliente</p>
           </div>
         </div>
       </section>
 
-      {/* Estadísticas */}
-      <section ref={refStats} className="bg-white py-20 text-center">
+      <section className="bg-white py-20 px-6">
+        <h2 className="text-3xl font-bold mb-10 text-center">Proyectos Recientes</h2>
+        <div className="grid md:grid-cols-3 gap-10">
+          {proyectos.map((p, i) => (
+            <div key={i} className="shadow-lg rounded-lg overflow-hidden hover:shadow-2xl transition">
+              <img src={p.imagen} alt={p.titulo} className="w-full h-48 object-cover" />
+              <div className="p-4">
+                <h3 className="font-bold text-lg mb-2">{p.titulo}</h3>
+                <p>{p.descripcion}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section ref={refStats} className="bg-gray-100 py-16 text-center">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 max-w-5xl mx-auto text-black">
           <div>
             <p className="text-4xl font-bold">{años}</p>
@@ -114,7 +147,7 @@ function App() {
             <p className="mt-1 uppercase text-sm">Tazas de café</p>
           </div>
           <div>
-            <p className="text-4xl font-bold">{proyectos}</p>
+            <p className="text-4xl font-bold">{proyectosTerminados}</p>
             <p className="mt-1 uppercase text-sm">Proyectos terminados</p>
           </div>
           <div>
@@ -124,15 +157,11 @@ function App() {
         </div>
       </section>
 
-      {/* Testimonios */}
       <section className="bg-white py-16 px-6">
         <h2 className="text-3xl font-bold mb-10 text-center">Lo que dicen nuestros clientes</h2>
         <div className="grid gap-6 md:grid-cols-3">
           {testimonios.map((t, i) => (
-            <div
-              key={i}
-              className="border border-gray-200 rounded-lg shadow-md p-4 hover:scale-105 transition-transform"
-            >
+            <div key={i} className="border border-gray-200 rounded-lg shadow-md p-4 hover:scale-105 transition-transform">
               <div className="flex items-center mb-2">
                 {[...Array(t.estrellas)].map((_, i) => (
                   <FaStar key={i} className="text-yellow-400 mr-1" />
@@ -145,45 +174,16 @@ function App() {
         </div>
       </section>
 
-      {/* Contacto */}
-      <section className="bg-gray-100 py-16 px-6 text-center">
+      <section className="bg-white py-16 px-6 text-center">
         <h2 className="text-3xl font-bold mb-6">Contáctanos</h2>
-        <form
-          action="https://formspree.io/f/xpzvjnzy"
-          method="POST"
-          className="max-w-lg mx-auto space-y-4"
-        >
-          <input
-            type="text"
-            name="name"
-            placeholder="Tu nombre"
-            required
-            className="w-full p-3 border border-gray-300 rounded"
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Tu correo"
-            required
-            className="w-full p-3 border border-gray-300 rounded"
-          />
-          <textarea
-            name="message"
-            placeholder="Tu mensaje"
-            required
-            rows="4"
-            className="w-full p-3 border border-gray-300 rounded"
-          />
-          <button
-            type="submit"
-            className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition"
-          >
-            Enviar
-          </button>
+        <form action="https://formspree.io/f/xpzvjnzy" method="POST" className="max-w-lg mx-auto space-y-4">
+          <input type="text" name="name" placeholder="Tu nombre" required className="w-full p-3 border border-gray-300 rounded" />
+          <input type="email" name="email" placeholder="Tu correo" required className="w-full p-3 border border-gray-300 rounded" />
+          <textarea name="message" placeholder="Tu mensaje" required rows="4" className="w-full p-3 border border-gray-300 rounded" />
+          <button type="submit" className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition">Enviar</button>
         </form>
       </section>
 
-      {/* Footer */}
       <footer className="bg-black text-white py-4 text-center text-sm">
         © {new Date().getFullYear()} TecnoMer. Todos los derechos reservados.
       </footer>
