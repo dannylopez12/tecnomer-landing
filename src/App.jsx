@@ -21,23 +21,23 @@ function App() {
     }
   ];
 
-  const proyectos = [
-    {
-      titulo: 'Bot de WhatsApp para Ventas',
-      descripcion: 'Asistente virtual que atiende clientes y automatiza ventas.',
-      imagen: 'https://source.unsplash.com/400x250/?chatbot,ai'
-    },
-    {
-      titulo: 'App de Delivery',
-      descripcion: 'Pedidos online para restaurantes con pagos integrados.',
-      imagen: 'https://source.unsplash.com/400x250/?app,mobile'
-    },
-    {
-      titulo: 'Sistema de Caja',
-      descripcion: 'Control de ventas, inventario y reportes desde cualquier dispositivo.',
-      imagen: 'https://source.unsplash.com/400x250/?pos,system'
-    }
-  ];
+ const proyectos = [
+  {
+    titulo: 'Bot de WhatsApp para Ventas',
+    descripcion: 'Asistente virtual que atiende clientes y automatiza ventas.',
+    imagen: '/chatbot-ventas.png' // Ruta relativa desde /public
+  },
+  {
+    titulo: 'App de Delivery',
+    descripcion: 'Pedidos online para restaurantes con pagos integrados.',
+    imagen: '/app-delivery.png' // ← Aquí puedes subir otra imagen a /public
+  },
+  {
+    titulo: 'Sistema de Caja',
+    descripcion: 'Control de ventas, inventario y reportes desde cualquier dispositivo.',
+    imagen: '/sistema-caja.png' // ← También deberás subir esta
+  }
+];
 
   return (
     <div className="bg-white font-sans text-gray-800">
