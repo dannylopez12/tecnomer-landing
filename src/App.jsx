@@ -70,6 +70,9 @@ const StatsSection = () => {
   );
 };
 
+  export default StatsSection;
+
+
  const proyectos = [
   {
     titulo: 'Bot de WhatsApp para Ventas',
