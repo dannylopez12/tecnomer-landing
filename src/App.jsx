@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './index.css';
 import { FaCheckCircle, FaStar, FaWhatsapp, FaInstagram, FaPhone } from 'react-icons/fa';
 
@@ -20,6 +20,55 @@ function App() {
       estrellas: 4
     }
   ];
+  const Counter = ({ label, end }) => {
+  const [count, setCount] = useState(0);
+  const ref = useRef();
+  const started = useRef(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true;
+          let current = 0;
+          const step = Math.ceil(end / 50);
+          const interval = setInterval(() => {
+            current += step;
+            if (current >= end) {
+              current = end;
+              clearInterval(interval);
+            }
+            setCount(current);
+          }, 30);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [end]);
+
+  return (
+    <div ref={ref} className="text-center">
+      <h3 className="text-4xl font-bold">{count}</h3>
+      <p className="uppercase text-xs mt-1">{label}</p>
+    </div>
+  );
+};
+
+const StatsSection = () => {
+  const daysWorked = Math.floor((Date.now() - new Date('2021-02-01')) / (1000 * 60 * 60 * 24));
+
+  return (
+    <section className="bg-white py-20 px-6 grid md:grid-cols-4 gap-10">
+      <Counter label="AÑOS DE EXPERIENCIA" end={4} />
+      <Counter label="TAZAS DE CAFE" end={daysWorked} />
+      <Counter label="PROYECTOS TERMINADOS" end={24} />
+      <Counter label="CLIENTES SATISFECHOS" end={15} />
+    </section>
+  );
+};
 
  const proyectos = [
   {
