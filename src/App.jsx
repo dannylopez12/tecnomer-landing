@@ -2,7 +2,6 @@ import React from 'react';
 import './index.css';
 import { FaCheckCircle, FaStar, FaWhatsapp, FaInstagram, FaPhone } from 'react-icons/fa';
 
-
 function App() {
   const testimonios = [
     {
@@ -22,42 +21,76 @@ function App() {
     }
   ];
 
+  const proyectos = [
+    {
+      titulo: 'Bot de WhatsApp para Ventas',
+      descripcion: 'Asistente virtual que atiende clientes y automatiza ventas.',
+      imagen: 'https://source.unsplash.com/400x250/?chatbot,ai'
+    },
+    {
+      titulo: 'App de Delivery',
+      descripcion: 'Pedidos online para restaurantes con pagos integrados.',
+      imagen: 'https://source.unsplash.com/400x250/?app,mobile'
+    },
+    {
+      titulo: 'Sistema de Caja',
+      descripcion: 'Control de ventas, inventario y reportes desde cualquier dispositivo.',
+      imagen: 'https://source.unsplash.com/400x250/?pos,system'
+    }
+  ];
+
   return (
     <div className="bg-white font-sans text-gray-800">
       {/* Hero */}
-      <section className="bg-white text-black py-16 px-6 text-center">
-        <img src="/logo.png" alt="TecnoMer Logo" className="mx-auto mb-6 w-32" />
-        <h1 className="text-4xl font-bold mb-4">Soluciones digitales para tu negocio</h1>
+      <section className="bg-white text-black py-16 px-6 text-center animate-fade-in">
+        <img src="/logo.png" alt="TecnoMer Logo" className="mx-auto mb-6 w-32 animate-pulse" />
+        <h1 className="text-4xl font-bold mb-4 animate-bounce">Soluciones digitales para tu negocio</h1>
         <p className="text-lg">Sistemas de caja, apps móviles y bots automatizados</p>
       </section>
 
       {/* Servicios */}
       <section className="bg-gray-100 py-16 px-6 text-center">
-        <h2 className="text-3xl font-bold mb-10">Nuestros Servicios</h2>
+        <h2 className="text-3xl font-bold mb-10 animate-fade-in">Nuestros Servicios</h2>
         <div className="grid gap-8 md:grid-cols-3">
-          <div>
+          <div className="transform hover:scale-105 transition duration-500">
             <FaCheckCircle className="text-purple-600 text-4xl mx-auto mb-2" />
             <p>Desarrollo de sistemas de facturación y punto de venta</p>
           </div>
-          <div>
+          <div className="transform hover:scale-105 transition duration-500">
             <FaCheckCircle className="text-purple-600 text-4xl mx-auto mb-2" />
             <p>Aplicaciones móviles personalizadas</p>
           </div>
-          <div>
+          <div className="transform hover:scale-105 transition duration-500">
             <FaCheckCircle className="text-purple-600 text-4xl mx-auto mb-2" />
             <p>Chatbots automatizados para atención al cliente</p>
           </div>
         </div>
       </section>
 
+      {/* Proyectos */}
+      <section className="bg-white py-16 px-6 text-center">
+        <h2 className="text-3xl font-bold mb-10">Nuestros Proyectos</h2>
+        <div className="grid md:grid-cols-3 gap-10">
+          {proyectos.map((p, i) => (
+            <div key={i} className="rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition">
+              <img src={p.imagen} alt={p.titulo} className="w-full h-48 object-cover" />
+              <div className="p-4">
+                <h3 className="font-bold text-lg mb-2">{p.titulo}</h3>
+                <p>{p.descripcion}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Testimonios */}
-      <section className="bg-white py-16 px-6">
+      <section className="bg-gray-100 py-16 px-6">
         <h2 className="text-3xl font-bold mb-10 text-center">Lo que dicen nuestros clientes</h2>
         <div className="grid gap-6 md:grid-cols-3">
           {testimonios.map((t, i) => (
             <div
               key={i}
-              className="border border-gray-200 rounded-lg shadow-md p-4 hover:scale-105 transition-transform"
+              className="border border-gray-200 rounded-lg shadow-md p-4 hover:shadow-xl transition"
             >
               <div className="flex items-center mb-2">
                 {[...Array(t.estrellas)].map((_, i) => (
@@ -72,7 +105,7 @@ function App() {
       </section>
 
       {/* Contacto */}
-      <section className="bg-gray-100 py-16 px-6 text-center">
+      <section className="bg-white py-16 px-6 text-center">
         <h2 className="text-3xl font-bold mb-6">Contáctanos</h2>
         <form
           action="https://formspree.io/f/xpzvjnzy"
@@ -115,40 +148,35 @@ function App() {
       </footer>
 
       {/* Botones flotantes */}
-      {/* Botón WhatsApp */}
-<a
-  href="https://wa.me/593988673679"
-  target="_blank"
-  rel="noopener noreferrer"
-  title="Chatea por WhatsApp"
-  className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition duration-300"
->
-  <FaWhatsapp className="text-2xl" />
-</a>
+      <a
+        href="https://wa.me/593988673679"
+        target="_blank"
+        rel="noopener noreferrer"
+        title="Chatea por WhatsApp"
+        className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition duration-300"
+      >
+        <FaWhatsapp className="text-2xl" />
+      </a>
 
-{/* Botón Instagram */}
-<a
-  href="https://instagram.com/tecnomer.ec"
-  target="_blank"
-  rel="noopener noreferrer"
-  title="Visita nuestro Instagram"
-  className="fixed bottom-6 right-20 z-50 bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500 hover:opacity-90 text-white p-4 rounded-full shadow-lg transition duration-300"
->
-  <FaInstagram className="text-2xl" />
-</a>
+      <a
+        href="https://instagram.com/tecnomer.ec"
+        target="_blank"
+        rel="noopener noreferrer"
+        title="Visita nuestro Instagram"
+        className="fixed bottom-6 right-20 z-50 bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500 hover:opacity-90 text-white p-4 rounded-full shadow-lg transition duration-300"
+      >
+        <FaInstagram className="text-2xl" />
+      </a>
 
-{/* Botón para llamar */}
-<a
-  href="tel:+593988673679"
-  title="Llamar a TecnoMer"
-  className="fixed bottom-6 right-36 z-50 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg transition duration-300"
->
-  <FaPhone className="text-2xl" />
-</a>
-
+      <a
+        href="tel:+593988673679"
+        title="Llamar a TecnoMer"
+        className="fixed bottom-6 right-36 z-50 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg transition duration-300"
+      >
+        <FaPhone className="text-2xl" />
+      </a>
     </div>
   );
 }
 
 export default App;
-
