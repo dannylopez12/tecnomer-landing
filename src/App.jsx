@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './index.css';
-import { FaCheckCircle, FaStar } from 'react-icons/fa';
+import { FaCheckCircle, FaStar, FaPhoneAlt } from 'react-icons/fa';
 
 function App() {
   const testimonios = [
@@ -25,16 +25,20 @@ function App() {
     {
       titulo: 'Bot de WhatsApp para Ventas',
       descripcion: 'Asistente virtual que atiende clientes y automatiza ventas.',
+      detalles: 'Este bot de WhatsApp responde consultas, da información de productos, toma pedidos y cierra ventas automáticamente 24/7. Mejora la atención al cliente, aumenta la tasa de conversión y reduce los costos de soporte.',
+      video: 'https://www.youtube.com/embed/TU8iJZ3J8gA',
       imagen: '/chatbot-ventas.png'
     },
     {
       titulo: 'App de Delivery',
       descripcion: 'Pedidos online para restaurantes con pagos integrados.',
+      detalles: 'Aplicación intuitiva para que tus clientes pidan desde su celular, con integración a pasarelas de pago, gestión de pedidos y rastreo de repartidores.',
       imagen: '/app-delivery.png'
     },
     {
       titulo: 'Sistema de Caja',
       descripcion: 'Control de ventas, inventario y reportes desde cualquier dispositivo.',
+      detalles: 'Sistema completo de punto de venta con facturación, control de inventario, cierres de caja, reportes y acceso desde cualquier lugar con conexión a Internet.',
       imagen: '/sistema-caja.png'
     }
   ];
@@ -42,11 +46,12 @@ function App() {
   const [dias, setDias] = useState(0);
   const [visible, setVisible] = useState(false);
   const refStats = useRef();
+  const [modal, setModal] = useState(null);
 
   useEffect(() => {
     const inicio = new Date('2021-02-01');
     const hoy = new Date();
-    const diferencia = Math.floor((hoy - inicio) / (1000 * 60 * 60 * 60));
+    const diferencia = Math.floor((hoy - inicio) / (1000 * 60 * 60 * 24));
     setDias(diferencia);
   }, []);
 
@@ -88,11 +93,31 @@ function App() {
   const clientes = animateValue(15);
 
   return (
-     <div className="bg-white font-sans text-gray-800 relative">
-     {/* Botones flotantes */}
+    <div className="bg-white font-sans text-gray-800 relative">
+      {modal && (
+        <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center px-4">
+          <div className="bg-white p-6 max-w-2xl w-full rounded-lg relative animate-fadeIn">
+            <button onClick={() => setModal(null)} className="absolute top-2 right-4 text-2xl">&times;</button>
+            <h3 className="text-2xl font-bold mb-2">{modal.titulo}</h3>
+            <p className="mb-4 text-sm text-gray-700">{modal.detalles}</p>
+            {modal.video && (
+              <div className="aspect-w-16 aspect-h-9">
+                <iframe
+                  className="w-full h-64"
+                  src={modal.video}
+                  title="Demostración"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Botones flotantes */}
       <a
         href="https://wa.me/593988673679"
-        className="fixed bottom-20 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition"
+        className="fixed bottom-28 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition"
         title="Habla con nosotros en WhatsApp"
         target="_blank"
         rel="noopener noreferrer"
@@ -102,12 +127,20 @@ function App() {
 
       <a
         href="https://instagram.com/tecnomer.ec"
-        className="fixed bottom-6 right-6 z-50 bg-gradient-to-br from-pink-500 to-purple-600 hover:opacity-90 text-white p-4 rounded-full shadow-lg transition"
+        className="fixed bottom-16 right-6 z-50 bg-gradient-to-br from-pink-500 to-purple-600 hover:opacity-90 text-white p-4 rounded-full shadow-lg transition"
         title="Síguenos en Instagram"
         target="_blank"
         rel="noopener noreferrer"
       >
         <i className="fab fa-instagram text-2xl"></i>
+      </a>
+
+      <a
+        href="tel:+593988673679"
+        className="fixed bottom-4 right-6 z-50 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg transition"
+        title="Llámanos"
+      >
+        <FaPhoneAlt className="text-xl" />
       </a>
 
       <section className="bg-white text-black py-16 px-6 text-center">
@@ -138,7 +171,7 @@ function App() {
         <h2 className="text-3xl font-bold mb-10 text-center">Proyectos Recientes</h2>
         <div className="grid md:grid-cols-3 gap-10">
           {proyectos.map((p, i) => (
-            <div key={i} className="shadow-lg rounded-lg overflow-hidden hover:shadow-2xl transition">
+            <div key={i} className="shadow-lg rounded-lg overflow-hidden hover:shadow-2xl transition cursor-pointer" onClick={() => setModal(p)}>
               <img src={p.imagen} alt={p.titulo} className="w-full h-48 object-cover" />
               <div className="p-4">
                 <h3 className="font-bold text-lg mb-2">{p.titulo}</h3>
@@ -205,3 +238,4 @@ function App() {
 }
 
 export default App;
+
