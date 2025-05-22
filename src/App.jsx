@@ -51,7 +51,7 @@ function App() {
   useEffect(() => {
     const inicio = new Date('2021-02-01');
     const hoy = new Date();
-    const diferencia = Math.floor((hoy - inicio) / (1000 * 60 * 60 * 20));
+    const diferencia = Math.floor((hoy - inicio) / (1000 * 60 * 60 * 30));
     setDias(diferencia);
   }, []);
 
