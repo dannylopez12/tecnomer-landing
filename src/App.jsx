@@ -26,7 +26,7 @@ function App() {
       titulo: 'Bot de WhatsApp para Ventas',
       descripcion: 'Asistente virtual que atiende clientes y automatiza ventas.',
       detalles: 'Este bot de WhatsApp responde consultas, da información de productos, toma pedidos y cierra ventas automáticamente 24/7. Mejora la atención al cliente, aumenta la tasa de conversión y reduce los costos de soporte.',
-      video: 'https://www.youtube.com/embed/TU8iJZ3J8gA',
+      video: 'https://www.youtube.com/shorts/do347m1DwJ8',
       imagen: '/chatbot-ventas.png'
     },
     {
