@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './index.css';
-import { FaCheckCircle, FaStar, FaPhoneAlt } from 'react-icons/fa';
+import { FaCheckCircle, FaStar, FaPhoneAlt, FaWhatsapp, FaInstagram } from 'react-icons/fa';
 
 function App() {
   const testimonios = [
@@ -51,7 +51,7 @@ function App() {
   useEffect(() => {
     const inicio = new Date('2021-02-01');
     const hoy = new Date();
-    const diferencia = Math.floor((hoy - inicio) / (1000 * 60 * 60 * 24));
+    const diferencia = Math.floor((hoy - inicio) / (1000 * 60 * 60 * 20));
     setDias(diferencia);
   }, []);
 
@@ -115,33 +115,34 @@ function App() {
       )}
 
       {/* Botones flotantes */}
-      <a
-        href="https://wa.me/593988673679"
-        className="fixed bottom-28 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition"
-        title="Habla con nosotros en WhatsApp"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <i className="fab fa-whatsapp text-2xl"></i>
-      </a>
+<a
+  href="https://wa.me/593988673679"
+  className="fixed bottom-28 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition"
+  title="Habla con nosotros en WhatsApp"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <FaWhatsapp className="text-2xl" />
+</a>
 
-      <a
-        href="https://instagram.com/tecnomer.ec"
-        className="fixed bottom-16 right-6 z-50 bg-gradient-to-br from-pink-500 to-purple-600 hover:opacity-90 text-white p-4 rounded-full shadow-lg transition"
-        title="Síguenos en Instagram"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <i className="fab fa-instagram text-2xl"></i>
-      </a>
+<a
+  href="https://instagram.com/tecnomer.ec"
+  className="fixed bottom-16 right-6 z-50 bg-gradient-to-br from-pink-500 to-purple-600 hover:opacity-90 text-white p-4 rounded-full shadow-lg transition"
+  title="Síguenos en Instagram"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <FaInstagram className="text-2xl" />
+</a>
 
-      <a
-        href="tel:+593988673679"
-        className="fixed bottom-4 right-6 z-50 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg transition"
-        title="Llámanos"
-      >
-        <FaPhoneAlt className="text-xl" />
-      </a>
+<a
+  href="tel:+593988673679"
+  className="fixed bottom-4 right-6 z-50 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg transition"
+  title="Llámanos"
+>
+  <FaPhoneAlt className="text-xl" />
+</a>
+
 
       <section className="bg-white text-black py-16 px-6 text-center">
         <img src="/logo.png" alt="TecnoMer Logo" className="mx-auto mb-6 w-32 animate-pulse" />
