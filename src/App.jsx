@@ -1,3 +1,4 @@
+import emailjs from 'emailjs-com';
 import React, { useEffect, useRef, useState } from 'react';
 import './index.css';
 import { FaCheckCircle, FaStar, FaPhoneAlt, FaWhatsapp, FaInstagram } from 'react-icons/fa';
@@ -66,6 +67,25 @@ function App() {
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  const enviarCorreo = (e) => {
+  e.preventDefault();
+
+  emailjs.sendForm(
+    'service_kiulntk',
+    'template_sefjuhc',
+    e.target,
+    'WXpmWnZhz1VBn-OPX'
+  ).then(
+    () => {
+      alert("Mensaje enviado correctamente 🚀");
+      e.target.reset();
+    },
+    (error) => {
+      alert("Hubo un error al enviar el mensaje.");
+      console.error(error);
+    }
+  );
+};
 
   const animateValue = (end, duration = 2000) => {
     const [value, setValue] = useState(0);
@@ -223,12 +243,13 @@ function App() {
 
       <section className="bg-white py-16 px-6 text-center">
         <h2 className="text-3xl font-bold mb-6">Contáctanos</h2>
-        <form action="https://formspree.io/f/xpzvjnzy" method="POST" className="max-w-lg mx-auto space-y-4">
-          <input type="text" name="name" placeholder="Tu nombre" required className="w-full p-3 border border-gray-300 rounded" />
-          <input type="email" name="email" placeholder="Tu correo" required className="w-full p-3 border border-gray-300 rounded" />
-          <textarea name="message" placeholder="Tu mensaje" required rows="4" className="w-full p-3 border border-gray-300 rounded" />
-          <button type="submit" className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition">Enviar</button>
-        </form>
+        <form onSubmit={enviarCorreo} className="max-w-lg mx-auto space-y-4">
+  <input type="text" name="name" placeholder="Tu nombre" required className="w-full p-3 border border-gray-300 rounded" />
+  <input type="email" name="email" placeholder="Tu correo" required className="w-full p-3 border border-gray-300 rounded" />
+  <textarea name="message" placeholder="Tu mensaje" required rows="4" className="w-full p-3 border border-gray-300 rounded" />
+  <button type="submit" className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition">Enviar</button>
+</form>
+
       </section>
 
       <footer className="bg-black text-white py-4 text-center text-sm">
