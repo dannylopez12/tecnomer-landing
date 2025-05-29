@@ -175,7 +175,7 @@ function App() {
         <div className="grid gap-8 md:grid-cols-3">
           <div className="hover:scale-105 transition">
             <FaCheckCircle className="text-purple-600 text-4xl mx-auto mb-2" />
-            <p>Desarrollo de sistemas de facturación y punto de venta</p>
+            <p>Desarrollo de sistemas de facturación, punto de venta y paginas web profesionales</p>
           </div>
           <div className="hover:scale-105 transition">
             <FaCheckCircle className="text-purple-600 text-4xl mx-auto mb-2" />
